@@ -8,7 +8,6 @@ const fulfilled = document.querySelector('[value=fulfilled]');
 const createPromise = event => {
   event.preventDefault();
   const promise = new Promise((resolve, reject) => {
-    console.log('robymo zapyt na server');
     const delay = input.value;
     setTimeout(() => {
       const isFulfilled = fulfilled.checked;
