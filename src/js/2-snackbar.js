@@ -1,8 +1,9 @@
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
+const form = document.querySelector('.form');
 const input = document.querySelector('[name=delay]');
-const submitBtn = document.querySelector('[type=submit]');
+// const submitBtn = document.querySelector('[type=submit]');
 const fulfilled = document.querySelector('[value=fulfilled]');
 
 const createPromise = event => {
@@ -12,22 +13,20 @@ const createPromise = event => {
     setTimeout(() => {
       const isFulfilled = fulfilled.checked;
       if (isFulfilled) {
-        resolve(
-          iziToast.show({ message: `✅ Fulfilled promise in ${delay}ms` })
-        );
+        resolve(delay);
       } else {
-        reject(iziToast.show({ message: `❌ Rejected promise in ${delay}ms` }));
+        reject(delay);
       }
     }, delay);
   });
 
   promise
-    .then(result => {
-      console.log(result);
+    .then(delay => {
+      iziToast.show({ message: `✅ Fulfilled promise in ${delay}ms` });
     })
-    .catch(err => {
-      console.log(err);
+    .catch(delay => {
+      iziToast.show({ message: `❌ Rejected promise in ${delay}ms` });
     });
 };
 
-submitBtn.addEventListener('click', createPromise);
+form.addEventListener('submit', createPromise);
